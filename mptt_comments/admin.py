@@ -42,7 +42,7 @@ class MpttCommentsAdmin(CommentsAdmin):
     getobject.short_description = _('Object')
 
 try:
-	admin.site.unregister(Comment)
+    admin.site.unregister(Comment)
 except:
-	pass
+    pass
 admin.site.register(get_model(), MpttCommentsAdmin)

@@ -46,7 +46,7 @@ class MpttCommentForm(CommentForm):
         # Truncates title to 255 chrs to avoid integrity errors
         return self.cleaned_data['title'][:255]
 
-    def get_comment_object(self):
+    def get_comment_object(self, site_id=None):
         """
         Return a new (unsaved) comment object based on the information in this
         form. Assumes that the form is already validated and will throw a
@@ -78,7 +78,7 @@ class MpttCommentForm(CommentForm):
             parent       = parent_comment
         )
 
-	# FIXME: maybe re-implement duplicate checking later
+        # FIXME: maybe re-implement duplicate checking later
 
         return new
         

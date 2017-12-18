@@ -1,54 +1,54 @@
-from django.conf.urls import patterns, url, include
+from django.conf.urls import url
 from django_comments.urls import urlpatterns as contrib_comments_urlpatterns
-from django.conf import settings
+from mptt_comments import views
 
-urlpatterns = patterns('mptt_comments.views',
+urlpatterns = [
     url(r'^new/(\d+)/$',
-        'new_comment',
+        views.new_comment,
         name='new-comment'
     ),
     url(r'^reply/(?P<parent_pk>\d+)/$',
-        'new_comment',
+        views.new_comment,
         name='comment-reply'
     ),
     url(r'^new_comment/(?P<content_type>[\w.]+)/(?P<object_pk>\d+)/$',
-        'new_comment',
+        views.new_comment,
         name='comment-toplevel-reply'
     ),
     url(r'^post/$',
-        'post_comment',
+        views.post_comment,
         name='comments-post-comment'
     ),
     url(r'^posted-ajax/$',
-        'comment_done_ajax',
+        views.comment_done_ajax,
         name='comments-comment-done-ajax'
     ),
     url(r'^more/(\d+)/$',
-        'comments_more',
+        views.comments_more,
         name='comments-more'
     ),
     url(r'^more-in-tree/(\d+)/$',
-        'comments_more',
+        views.comments_more,
         name='comments-more-in-tree',
-        kwargs={'restrict_to_tree': True }
+        kwargs={'restrict_to_tree': True}
     ),
     url(r'^replies/(\d+)/$',
-        'comments_subtree',
+        views.comments_subtree,
         name='comments-subtree'
     ),
     url(r'^detail/(\d+)/$',
-        'comments_subtree',
+        views.comments_subtree,
         name='comment-detail',
         kwargs={'include_self': True, 'include_ancestors': True}
     ),
     url(r'^tree/(\d+)/$',
-        'comments_fulltree',
+        views.comments_fulltree,
         name='comment-detail-tree',
     ),
     url(r'^count/(\d+)/(\d+)/$',
-        'count_for_object',
+        views.count_for_object,
         name='comments-count'
     )
-)
+]
 
 urlpatterns += contrib_comments_urlpatterns

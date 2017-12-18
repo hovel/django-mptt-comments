@@ -17,7 +17,7 @@ class AbstractMpttComment(MPTTModel, Comment):
             self.ip_address = '0.0.0.0'
         super(AbstractMpttComment, self).save(*a, **kw)
         
-    def get_absolute_url(self):
+    def get_absolute_url(self, anchor_pattern="#c%(id)s"):
         tree_url = urlresolvers.reverse("comment-detail-tree", args=(self.tree_id, ))
         return "%s#c%s" % (tree_url, self.id)
     
